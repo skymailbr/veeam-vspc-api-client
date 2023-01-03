@@ -1,0 +1,83 @@
+<?php
+
+namespace Shellrent\VeeamVspcApiClient\Support;
+
+use GuzzleHttp\Psr7\Request;
+
+
+class RequestBuilder {
+	private string $Method;
+	
+	private string $Uri;
+	
+	private array $Headers;
+	
+	private $Body;
+	
+	private string $Version;
+	
+	private array $UriModifiers = [];
+	
+	/**
+	 * Request constructor.
+	 *
+	 * @param string $Method
+	 * @param string $Uri
+	 * @param array $Headers
+	 * @param null $Body
+	 * @param string $Version
+	 */
+	public function __construct( string $Method, string $Uri, array $Headers = [], $Body = null, string $Version = '1.1' ) {
+		$this->Method = $Method;
+		$this->Uri = $Uri;
+		$this->Headers = $Headers;
+		$this->Body = $Body;
+		$this->Version = $Version;
+	}
+	
+	private function registerPostModifiers() {
+		$this->UriModifiers[] = fn ( $uri ) => trim( $uri, '/' );
+	}
+	
+	public function query( array $query ) {
+		$this->UriModifiers[] = function ( $uri ) use ( $query ) {
+			$urlBuilder = UrlBuilder::createByUrl( $uri );
+			
+			foreach ( $query as $key => $value ) {
+				$urlBuilder->addQueryParam( $key, $value );
+			}
+			
+			return $urlBuilder
+				->asPath()
+				->build();
+		};
+		
+		return $this;
+	}
+	
+	public function filter( Filter $filter ): self {
+		$json = json_encode( $filter );
+		
+		$this->UriModifiers[] = function ( $uri ) use ( $json ) {
+			$urlBuilder = UrlBuilder::createByUrl( $uri );
+			
+			$urlBuilder->addQueryParam( 'filter', $json );
+			
+			return $urlBuilder
+				->asPath()
+				->build();
+		};
+		
+		return $this;
+	}
+	
+	public function buildRequest() {
+		$this->registerPostModifiers();
+		
+		foreach ( $this->UriModifiers as $modifier ) {
+			$this->Uri = $modifier( $this->Uri );
+		}
+		
+		return new Request( $this->Method, $this->Uri, $this->Headers, $this->Body, $this->Version );
+	}
+}

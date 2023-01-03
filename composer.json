@@ -1,0 +1,20 @@
+{
+    "name": "shellrent/veeam-vspc-api-client",
+    "description": "PHP Client for Veeam Service Provider Console API",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Shellrent\\VeeamVspcApiClient\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Matteo Miotello",
+            "email": "matteo.miotello@shellrent.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.5"
+    },
+}
