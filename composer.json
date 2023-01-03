@@ -3,6 +3,12 @@
     "description": "PHP Client for Veeam Service Provider Console API",
     "type": "library",
     "license": "MIT",
+    "keywords": [
+        "Veeam",
+        "VSPC",
+        "Api Client",
+        "PHP Api client"
+    ],
     "autoload": {
         "psr-4": {
             "Shellrent\\VeeamVspcApiClient\\": "src/"
@@ -16,5 +22,5 @@
     ],
     "require": {
         "guzzlehttp/guzzle": "^7.5"
-    },
+    }
 }
