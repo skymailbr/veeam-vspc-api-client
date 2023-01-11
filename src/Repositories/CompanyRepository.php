@@ -6,6 +6,7 @@ use Shellrent\VeeamVspcApiClient\Payloads\CreateCompanyBackupResourcePayload;
 use Shellrent\VeeamVspcApiClient\Payloads\CreateCompanyPayload;
 use Shellrent\VeeamVspcApiClient\Payloads\CreateCompanySiteResourcePayload;
 use Shellrent\VeeamVspcApiClient\Payloads\EditCompanyBackupResourcePayload;
+use Shellrent\VeeamVspcApiClient\Payloads\ModifyCompanyPayload;
 use Shellrent\VeeamVspcApiClient\Support\CreateDeleteRequest;
 use Shellrent\VeeamVspcApiClient\Support\CreateGetRequest;
 use Shellrent\VeeamVspcApiClient\Support\CreatePatchRequest;
@@ -39,6 +40,10 @@ class CompanyRepository implements Repository {
 	
 	public function postCreate( CreateCompanyPayload $request ): RequestBuilder {
 		return $this->createPostRequest( '', $request );
+	}
+	
+	public function patchModifyCompany( string $companyUid, ModifyCompanyPayload $payload ): RequestBuilder {
+		return $this->createPatchRequest( sprintf( '/%s', $companyUid ), $payload );
 	}
 	
 	public function postCreateCompanySiteResource( string $companyUid, CreateCompanySiteResourcePayload $request ): RequestBuilder {
