@@ -5,6 +5,7 @@ namespace Shellrent\VeeamVspcApiClient;
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
 use Shellrent\VeeamVspcApiClient\Support\Filter;
+use Shellrent\VeeamVspcApiClient\Support\FilterCollection;
 use Shellrent\VeeamVspcApiClient\Support\RequestBuilder;
 
 class VeeamSPCClient {
@@ -49,7 +50,15 @@ class VeeamSPCClient {
 		return array_merge( $this->Options, $additions );
 	}
 	
-	public function send( RequestBuilder $requestBuilder, ?Filter $filter = null, ?array $queryParams = null ) {
+	/**
+	 * @param RequestBuilder $requestBuilder
+	 * @param null|Filter|FilterCollection $filter
+	 * @param array|null $queryParams
+	 *
+	 * @throws \GuzzleHttp\Exception\GuzzleException
+	 * @return \Psr\Http\Message\ResponseInterface
+	 */
+	public function send( RequestBuilder $requestBuilder, $filter = null, ?array $queryParams = null ) {
 		if ( $filter ) {
 			$requestBuilder->filter( $filter );
 		}
@@ -61,7 +70,15 @@ class VeeamSPCClient {
 		return $this->Client->send( $requestBuilder->buildRequest(), $this->getOptions() );
 	}
 	
-	public function jsonResponse( RequestBuilder $requestBuilder, ?Filter $filter = null, ?array $queryParams = null ) {
+	/**
+	 * @param RequestBuilder $requestBuilder
+	 * @param null|Filter|FilterCollection $filter
+	 * @param array|null $queryParams
+	 *
+	 * @throws \GuzzleHttp\Exception\GuzzleException
+	 * @return mixed
+	 */
+	public function jsonResponse( RequestBuilder $requestBuilder, $filter = null, ?array $queryParams = null ) {
 		if ( $filter ) {
 			$requestBuilder->filter( $filter );
 		}
