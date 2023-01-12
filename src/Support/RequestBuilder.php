@@ -55,7 +55,12 @@ class RequestBuilder {
 		return $this;
 	}
 	
-	public function filter( Filter $filter ): self {
+	/**
+	 * @param Filter|FilterCollection $filter
+	 *
+	 * @return $this
+	 */
+	public function filter( $filter ): self {
 		$json = json_encode( $filter );
 		
 		$this->UriModifiers[] = function ( $uri ) use ( $json ) {

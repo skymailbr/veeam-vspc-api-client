@@ -22,4 +22,8 @@ class BackupAgentRepository implements Repository {
 	public function delete( string $backupAgentUid ) {
 		return $this->createDeleteRequest( '/' . $backupAgentUid );
 	}
+	
+	public function getAllVeeamBackupAgentJobs(): RequestBuilder {
+		return $this->createGetRequest( '/jobs' );
+	}
 }
