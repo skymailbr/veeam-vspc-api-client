@@ -16,18 +16,38 @@ class LicensingRepository implements Repository {
 		return $this->createGetRequest( '/console/usage' );
 	}
 	
+	/**
+	 * @param string $companyUid
+	 *
+	 * @return RequestBuilder
+	 * @deprecated
+	 */
 	public function getConsoleUsagesByCompany( string $companyUid ): RequestBuilder {
 		return $this->createGetRequest( sprintf( '/console/usage/companies/%s', $companyUid ) );
 	}
 	
+	/**
+	 * @param string $companyUid
+	 *
+	 * @return RequestBuilder
+	 * @deprecated 
+	 */
 	public function getUsageOfVeeamBackupReplicationLicensesByCompany( string $companyUid ): RequestBuilder {
 		return $this->createGetRequest( '/backupServers/usage/companies/' . $companyUid );
 	}
 	
+	/**
+	 * @return RequestBuilder
+	 * @deprecated
+	 */
 	public function getUsageOfVeeamBackupReplicationLicensesByAllCompanies(): RequestBuilder {
 		return $this->createGetRequest( '/backupServers/usage/companies' );
 	}
 	
+	/**
+	 * @return RequestBuilder
+	 * @deprecated
+	 */
 	public function getUsageOfAllVeeamBackupReplicationLicenses(): RequestBuilder {
 		return $this->createGetRequest( '/backupServers/usage' );
 	}
@@ -40,10 +60,22 @@ class LicensingRepository implements Repository {
 		return $this->createGetRequest( sprintf( '/backupServers/%s', $backupServerUid ) );
 	}
 	
+	/**
+	 * @param string $companyUid
+	 *
+	 * @return RequestBuilder
+	 * @deprecated
+	 */
 	public function getUsageOfVeeamBackupForMicrosoft365LicensesByCompany( string $companyUid ): RequestBuilder {
 		return $this->createGetRequest( sprintf( '/vbm365Servers/usage/companies/%s', $companyUid ) );
 	}
 	
+	/**
+	 * @param string $backupServerUid
+	 *
+	 * @return RequestBuilder
+	 * @deprecated
+	 */
 	public function getUsageOfVeeamBackupReplicationLicense( string $backupServerUid ): RequestBuilder {
 		return  $this->createGetRequest( sprintf( '/backupServers/%s/usage', $backupServerUid ) );
 	}
@@ -52,11 +84,19 @@ class LicensingRepository implements Repository {
 		return $this->createGetRequest( sprintf( '/vbm365Servers/%s', $vbm365ServerUid ) );
 	}
 	
+	/**
+	 * @return RequestBuilder
+	 * @deprecated
+	 */
 	public function getUsageOfAllVeeamBackupForMicrosoft365Licenses(): RequestBuilder {
 		return $this->createGetRequest( '/vbm365Servers/usage' );
 	}
 	
 	public function getAllVeeamBackupForMicrosoft365Licenses(): RequestBuilder {
 		return $this->createGetRequest( '/vbm365Servers' );
+	}
+	
+	public function getLicenseUsageByAllOrganizations(): RequestBuilder {
+		return $this->createGetRequest( '/usage/organizations' );
 	}
 }
