@@ -81,7 +81,7 @@ class LicensingRepository implements Repository {
 	}
 	
 	public function getVeeamBackupForMicrosoft365License( string $vbm365ServerUid ): RequestBuilder {
-		return $this->createGetRequest( sprintf( '/vbm365Servers/%s', $vbm365ServerUid ) );
+		return $this->createGetRequest( sprintf( '/vb365Servers/%s', $vbm365ServerUid ) );
 	}
 	
 	/**
@@ -93,7 +93,7 @@ class LicensingRepository implements Repository {
 	}
 	
 	public function getAllVeeamBackupForMicrosoft365Licenses(): RequestBuilder {
-		return $this->createGetRequest( '/vbm365Servers' );
+		return $this->createGetRequest( '/vb365Servers' );
 	}
 	
 	public function getLicenseUsageByAllOrganizations(): RequestBuilder {
