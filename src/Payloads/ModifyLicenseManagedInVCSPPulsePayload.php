@@ -23,6 +23,16 @@ class ModifyLicenseManagedInVCSPPulsePayload implements Payload {
 		return $this;
 	}
 	
+	public function expirationDate( string $isoDate ): ModifyLicenseManagedInVCSPPulsePayload {
+		$this->Modifiers[] = [
+			'value' => $isoDate,
+			'path' => '/expirationDate',
+			'op' => 'replace'
+		];
+		
+		return $this;
+	}
+	
 	public function getContentType(): string {
 		return 'application/json';
 	}
