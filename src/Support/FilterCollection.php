@@ -12,7 +12,7 @@ class FilterCollection implements \JsonSerializable {
 		$this->Filters[] = $filter->toArray();
 	}
 	
-	public function jsonSerialize() {
+	public function jsonSerialize(): mixed {
 		return $this->Filters;
 	}
 }
