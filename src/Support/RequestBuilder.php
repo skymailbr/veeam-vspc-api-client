@@ -1,23 +1,23 @@
 <?php
 
-namespace Shellrent\VeeamVspcApiClient\Support;
+namespace Skymail\VeeamVspcApiClient\Support;
 
 use GuzzleHttp\Psr7\Request;
 
 
 class RequestBuilder {
-	private string $Method;
-	
-	private string $Uri;
-	
-	private array $Headers;
-	
+	private $Method;
+
+	private $Uri;
+
+	private $Headers;
+
 	private $Body;
-	
-	private string $Version;
-	
-	private array $UriModifiers = [];
-	
+
+	private $Version;
+
+	private $UriModifiers = [];
+
 	/**
 	 * Request constructor.
 	 *
@@ -34,27 +34,29 @@ class RequestBuilder {
 		$this->Body = $Body;
 		$this->Version = $Version;
 	}
-	
+
 	private function registerPostModifiers() {
-		$this->UriModifiers[] = fn ( $uri ) => trim( $uri, '/' );
+		$this->UriModifiers[] = function($uri) {
+			return trim($uri, '/');
+		};
 	}
-	
+
 	public function query( array $query ) {
 		$this->UriModifiers[] = function ( $uri ) use ( $query ) {
 			$urlBuilder = UrlBuilder::createByUrl( $uri );
-			
+
 			foreach ( $query as $key => $value ) {
 				$urlBuilder->addQueryParam( $key, $value );
 			}
-			
+
 			return $urlBuilder
 				->asPath()
 				->build();
 		};
-		
+
 		return $this;
 	}
-	
+
 	/**
 	 * @param Filter|FilterCollection $filter
 	 *
@@ -62,27 +64,27 @@ class RequestBuilder {
 	 */
 	public function filter( $filter ): self {
 		$json = json_encode( $filter );
-		
+
 		$this->UriModifiers[] = function ( $uri ) use ( $json ) {
 			$urlBuilder = UrlBuilder::createByUrl( $uri );
-			
+
 			$urlBuilder->addQueryParam( 'filter', $json );
-			
+
 			return $urlBuilder
 				->asPath()
 				->build();
 		};
-		
+
 		return $this;
 	}
-	
+
 	public function buildRequest() {
 		$this->registerPostModifiers();
-		
+
 		foreach ( $this->UriModifiers as $modifier ) {
 			$this->Uri = $modifier( $this->Uri );
 		}
-		
+
 		return new Request( $this->Method, $this->Uri, $this->Headers, $this->Body, $this->Version );
 	}
 }

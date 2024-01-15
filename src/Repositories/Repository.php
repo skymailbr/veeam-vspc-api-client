@@ -1,6 +1,6 @@
 <?php
 
-namespace Shellrent\VeeamVspcApiClient\Repositories;
+namespace Skymail\VeeamVspcApiClient\Repositories;
 
 interface Repository {
 	public function getBaseRoute(): string;

@@ -1,12 +1,13 @@
 <?php
 
-namespace Shellrent\VeeamVspcApiClient\Support;
+namespace Skymail\VeeamVspcApiClient\Support;
 
 class UrlBuilder {
 	/**
 	 * Check if the call to {@link parse_url} returned FALSE
+	 * @var bool
 	 */
-	private bool $ParseError = false;
+	private $ParseError = false;
 
 	/**
 	 * @var string|null
@@ -47,9 +48,12 @@ class UrlBuilder {
 	 * @var string|null
 	 */
 	private $Anchor;
-	
-	private bool $AsPath = false;
-	
+
+	/**
+	 * @var bool
+	 */
+	private $AsPath = false;
+
 	/**
 	 * @param string $url
 	 *
@@ -127,7 +131,7 @@ class UrlBuilder {
 		if ( empty( $this->Protocol ) ) {
 			$this->Protocol = 'https';
 		}
-		
+
 		if ( !$this->AsPath ) {
 			$url .= sprintf( '%s://', $this->Protocol );
 		}
@@ -381,10 +385,10 @@ class UrlBuilder {
 	public function isParseError(): bool {
 		return $this->ParseError;
 	}
-	
+
 	public function asPath(): self {
 		$this->AsPath = true;
-		
+
 		return $this;
 	}
 

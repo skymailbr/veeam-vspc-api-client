@@ -1,6 +1,6 @@
 <?php
 
-namespace Shellrent\VeeamVspcApiClient\Support;
+namespace Skymail\VeeamVspcApiClient\Support;
 
 use JsonSerializable;
 
@@ -19,17 +19,17 @@ class Filter implements JsonSerializable {
 	public const OPERATION_OR = 'or';
 	public const OPERATION_AND = 'and';
 	public const OPERATION_NOT = 'not';
-	
-	private string $Property;
-	
-	private ?string $Items = null;
-	
-	private string $Operation;
-	
-	private ?string $Collation = null;
-	
-	private string $Value;
-	
+
+	private $Property;
+
+	private $Items = null;
+
+	private $Operation;
+
+	private $Collation = null;
+
+	private $Value;
+
 	/**
 	 * Filter constructor.
 	 *
@@ -42,7 +42,7 @@ class Filter implements JsonSerializable {
 		$this->Operation = $Operation;
 		$this->Value = $Value;
 	}
-	
+
 	/**
 	 * @param string $Property
 	 *
@@ -50,10 +50,10 @@ class Filter implements JsonSerializable {
 	 */
 	public function setProperty( string $Property ): Filter {
 		$this->Property = $Property;
-		
+
 		return $this;
 	}
-	
+
 	/**
 	 * @param string|null $Items
 	 *
@@ -61,10 +61,10 @@ class Filter implements JsonSerializable {
 	 */
 	public function setItems( ?string $Items ): Filter {
 		$this->Items = $Items;
-		
+
 		return $this;
 	}
-	
+
 	/**
 	 * @param string $Operation
 	 *
@@ -72,10 +72,10 @@ class Filter implements JsonSerializable {
 	 */
 	public function setOperation( string $Operation ): Filter {
 		$this->Operation = $Operation;
-		
+
 		return $this;
 	}
-	
+
 	/**
 	 * @param string|null $Collation
 	 *
@@ -83,10 +83,10 @@ class Filter implements JsonSerializable {
 	 */
 	public function setCollation( ?string $Collation ): Filter {
 		$this->Collation = $Collation;
-		
+
 		return $this;
 	}
-	
+
 	/**
 	 * @param string $Value
 	 *
@@ -94,10 +94,10 @@ class Filter implements JsonSerializable {
 	 */
 	public function setValue( string $Value ): Filter {
 		$this->Value = $Value;
-		
+
 		return $this;
 	}
-	
+
 	public function toArray() {
 		return [
 			'property' => $this->Property,
@@ -107,7 +107,7 @@ class Filter implements JsonSerializable {
 			'value' => $this->Value,
 		];
 	}
-	
+
 	public function jsonSerialize(): mixed {
 		return [$this->toArray()];
 	}

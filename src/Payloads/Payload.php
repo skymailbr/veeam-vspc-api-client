@@ -1,6 +1,6 @@
 <?php
 
-namespace Shellrent\VeeamVspcApiClient\Payloads;
+namespace Skymail\VeeamVspcApiClient\Payloads;
 
 interface Payload {
 	public function getBody();
