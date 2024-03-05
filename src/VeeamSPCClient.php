@@ -62,8 +62,6 @@ class VeeamSPCClient {
 			$requestBuilder->query( $queryParams );
 		}
 
-		// dd($requestBuilder->buildRequest());
-
 		return $this->Client->send( $requestBuilder->buildRequest(), $this->getOptions() );
 	}
 
