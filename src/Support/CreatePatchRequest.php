@@ -2,7 +2,7 @@
 
 namespace Skymail\VeeamVspcApiClient\Support;
 
-use Skymail\VeeamVspcApiClient\Payloads\Payload;
+use Skymail\VeeamVspcApiClient\Repositories\Payload;
 
 trait CreatePatchRequest {
 	protected function createPatchRequest( string $url, ?Payload $payload = null, array $options = [] ): RequestBuilder {

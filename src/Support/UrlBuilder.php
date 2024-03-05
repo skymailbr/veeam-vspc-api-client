@@ -5,7 +5,6 @@ namespace Skymail\VeeamVspcApiClient\Support;
 class UrlBuilder {
 	/**
 	 * Check if the call to {@link parse_url} returned FALSE
-	 * @var bool
 	 */
 	private $ParseError = false;
 
@@ -49,9 +48,6 @@ class UrlBuilder {
 	 */
 	private $Anchor;
 
-	/**
-	 * @var bool
-	 */
 	private $AsPath = false;
 
 	/**

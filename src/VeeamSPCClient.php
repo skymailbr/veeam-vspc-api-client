@@ -12,20 +12,13 @@ class VeeamSPCClient {
 
 	protected $Client;
 
-	
-	/**
-	 * @var string
-	 */
 	protected $Token = null;
 
 	protected $Options;
 
 	protected $Endpoint;
 
-	/**
-	 * VeeamServiceProviderConsoleClient constructor.
-	 */
-	public function __construct( string $Endpoint, ?string $Token = null, array $Options = [] ) {
+	public function __construct( string $Endpoint, string $Token, array $Options = [] ) {
 		$this->Token = $Token;
 		$this->Endpoint = $Endpoint;
 		$this->Options = $Options;
@@ -68,6 +61,8 @@ class VeeamSPCClient {
 		if ( $queryParams ) {
 			$requestBuilder->query( $queryParams );
 		}
+
+		// dd($requestBuilder->buildRequest());
 
 		return $this->Client->send( $requestBuilder->buildRequest(), $this->getOptions() );
 	}
