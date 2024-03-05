@@ -16,4 +16,14 @@ class OrganizationRepository implements Repository {
 		return $this->createGetRequest( '' );
 	}
 
+	public function getStorage(): RequestBuilder
+	{
+		return $this->createGetRequest('/companies/sites/backupResources/usage');
+	}
+
+	public function getAllLocations(): RequestBuilder
+	{
+		return $this->createGetRequest('/locations');
+	}
+
 }
