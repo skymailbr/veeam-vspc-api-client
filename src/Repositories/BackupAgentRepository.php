@@ -15,11 +15,12 @@ class BackupAgentRepository implements Repository {
 		return 'infrastructure/backupAgents';
 	}
 
-	public function getAll($offset, $limit, $order): RequestBuilder {
+	public function getAll($offset, $limit, $order = null): RequestBuilder {
+		$queryString = '?limit=' . $limit . '&offset=' . $offset;
 		if ($order) {
-			return $this->createGetRequest( '?limit=' . $limit . '&offset=' . $offset . '&sort=' . $order);
+			$queryString .= '&sort=' . $order;
 		}
-		return $this->createGetRequest( '?limit=' . $limit . '&offset=' . $offset);
+		return $this->createGetRequest( $queryString );
 	}
 
 	public function delete( string $backupAgentUid ) {

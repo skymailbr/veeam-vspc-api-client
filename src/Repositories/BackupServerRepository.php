@@ -24,11 +24,12 @@ class BackupServerRepository implements Repository {
 		return $this->createGetRequest( sprintf( '/%s/repositories/%s', $backupServerUid, $repositoryUid ) );
 	}
 
-	public function getAllJobs($offset, $limit, $order): RequestBuilder {
+	public function getAllJobs($offset, $limit, $order = null): RequestBuilder {
+		$queryString = '/jobs?limit=' . $limit . '&offset=' . $offset;
 		if ($order) {
-			return $this->createGetRequest( '/jobs?limit=' . $limit . '&offset=' . $offset . '&sort=' . $order);
+			$queryString .= '&sort=' . $order;
 		}
-		return $this->createGetRequest( '/jobs?limit=' . $limit . '&offset=' . $offset );
+		return $this->createGetRequest( $queryString );
 	}
 
 	public function getAllAgentJobs(): RequestBuilder {
