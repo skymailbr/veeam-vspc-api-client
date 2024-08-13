@@ -26,4 +26,10 @@ class OrganizationRepository implements Repository {
 		return $this->createGetRequest('/locations');
 	}
 
+	public function getCompanies($expandOrganization = false): RequestBuilder {
+		if ($expandOrganization) {
+			return $this->createGetRequest( '/companies?expand=Organization&' );
+		}
+		return $this->createGetRequest( '/companies' );
+	}
 }
