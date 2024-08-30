@@ -32,4 +32,13 @@ class OrganizationRepository implements Repository {
 		}
 		return $this->createGetRequest( '/companies' );
 	}
+
+	public function getStoragePagination($offset, $limit, $order = null): RequestBuilder
+	{
+		$queryString = '/companies/sites/backupResources/usage?limit=' . $limit . '&offset=' . $offset;
+		if ($order) {
+			$queryString .= '&sort=' . $order;
+		}
+		return $this->createGetRequest( $queryString );
+	}
 }
