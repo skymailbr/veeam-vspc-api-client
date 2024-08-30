@@ -43,4 +43,8 @@ class BackupServerRepository implements Repository {
 	public function getAllBackupVmJobsObjects($jobUid): RequestBuilder {
 		return $this->createGetRequest( sprintf( '/jobs/backupVmJobs/%s/objects', $jobUid) );
 	}
+
+	public function getAllCopyFileJobsObjects($jobUid): RequestBuilder {
+		return $this->createGetRequest( sprintf( '/jobs/fileCopyJobs/%s/', $jobUid) );
+	}
 }
